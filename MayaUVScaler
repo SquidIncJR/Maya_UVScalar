@@ -1,0 +1,12 @@
+import maya.cmds as mel
+
+selected = mel.ls(sl=True, o=True)
+print (selected)
+
+for eachSel in selected:
+    #grabs the uv's of the selected object
+    uv = mel.polyEvaluate(eachSel, uv=True)
+    #if the object has UV's
+    if uv:
+        for u in range (uv):
+            uvPos = mel.polyEditUV("%s.map[%d]" % (eachSel, u), pu=0,pv=1, su=0.5, sv=0.5)
